@@ -1,12 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
 
-namespace NChat.Application
+namespace NChat.Application;
+public static class ApplicationServiceRegistration
 {
-    internal class ApplicationServiceRegistration
-    {
+    public static void AddApplicationService(this IServiceCollection services,IConfiguration configuration)
+    { 
+
     }
 }

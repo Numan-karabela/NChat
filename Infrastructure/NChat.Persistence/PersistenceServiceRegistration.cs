@@ -1,12 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
+using NChat.Domain.Entities.Identity;
+using NChat.Persistence.Context;
 
-namespace NChat.Persistence
+namespace NChat.Persistence;
+
+public static class PersistenceServiceRegistration
 {
-    internal class PersistenceServiceRegistration
+    public static void AddPersistenceService(this IServiceCollection services,IConfiguration configuration)
     {
+        services.AddDbContext<NChatDbContext>(options => 
+        options.UseSqlServer(configuration.GetConnectionString("NChatSql")));
+        services.AddIdentity<AppUser,AppRole>().AddEntityFrameworkStores<NChatDbContext>();
     }
 }

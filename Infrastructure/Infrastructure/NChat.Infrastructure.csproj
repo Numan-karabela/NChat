@@ -6,4 +6,9 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\..\Core\Application\NChat.Application.csproj" />
+    <ProjectReference Include="..\NChat.Persistence\NChat.Persistence.csproj" />
+  </ItemGroup>
+
 </Project>

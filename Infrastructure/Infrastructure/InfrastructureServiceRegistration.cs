@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace NChat.Infrastructure
 {
-    class InfrastructureServiceRegistration
+   public class InfrastructureServiceRegistration
     {
     }
 }

@@ -11,4 +11,8 @@
     <Folder Include="Abstractions\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Domain\NChat.Domain.csproj" />
+  </ItemGroup>
+
 </Project>
