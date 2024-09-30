@@ -7,7 +7,9 @@ using System.Threading.Tasks;
 
 namespace NChat.Domain.Entities.Identity
 {
-    public sealed class AppUser:IdentityUser<String>
+    public  class AppUser:IdentityUser<String>
     {
+        public string MessageId { get; set; }
+        public ICollection<Message> Messages { get; set; }
     }
 }

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace NChat.Domain.Entities.Identity
 {
-    public sealed class AppRole:IdentityRole<string>
+    public  class AppRole:IdentityRole<string>
     {
     }
 }
