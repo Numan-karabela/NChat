@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using NChat.Application.Abstractions;
 using NChat.Domain.Entities;
 using NChat.Domain.Entities.Identity;
 using System;
@@ -10,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace NChat.Persistence.Context
 {
-    public class NChatDbContext : IdentityDbContext<AppUser, AppRole, string>
+    public class NChatDbContext : IdentityDbContext<AppUser, AppRole, string>,INChatDbContext
     {
        
         public NChatDbContext(DbContextOptions options) : base(options)
