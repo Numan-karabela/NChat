@@ -9,7 +9,7 @@ namespace NChat.Application.Features.Users.LoginUsers
 {
     public class LoginUserCommanRequest:IRequest<string>
     {
-        public string UserNameOrEMail { get; set; }
+        public string UserNameOrEmail { get; set; }
         public string Password { get; set; }
     }
 }

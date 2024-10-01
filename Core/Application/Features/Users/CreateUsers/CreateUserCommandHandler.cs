@@ -10,12 +10,12 @@ using System.Threading.Tasks;
 
 namespace NChat.Application.Features.Users.CreateUsers;
 
-public class CreateUserCommandHandler(UserManager<AppUser> userManager,IMapper _mapper) : IRequestHandler<CreateUserCommandRequest, string>
+public class CreateUserCommandHandler(UserManager<AppUser> _userManager,IMapper _mapper) : IRequestHandler<CreateUserCommandRequest, string>
 {
     public async Task<string> Handle(CreateUserCommandRequest request, CancellationToken cancellationToken)
     {
        var user= _mapper.Map<AppUser>(request);
-       var  ıdentityResult=await userManager.CreateAsync(user,request.Password);
+       var  ıdentityResult=await _userManager.CreateAsync(user,request.Password);
         
         return ıdentityResult.ToString();
     }
