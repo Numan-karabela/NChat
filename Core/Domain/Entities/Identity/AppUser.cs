@@ -10,6 +10,4 @@ namespace NChat.Domain.Entities.Identity;
 
 public class AppUser : IdentityUser<string>
 {
-    public string SentMessagesId { get; set; }
-    public Message SentMessages { get; set; } 
 }

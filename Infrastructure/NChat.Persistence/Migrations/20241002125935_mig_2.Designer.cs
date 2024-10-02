@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using NChat.Persistence.Context;
 
@@ -11,9 +12,11 @@ using NChat.Persistence.Context;
 namespace NChat.Persistence.Migrations
 {
     [DbContext(typeof(NChatDbContext))]
-    partial class NChatDbContextModelSnapshot : ModelSnapshot
+    [Migration("20241002125935_mig_2")]
+    partial class mig_2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -180,6 +183,9 @@ namespace NChat.Persistence.Migrations
                     b.Property<DateTimeOffset?>("LockoutEnd")
                         .HasColumnType("datetimeoffset");
 
+                    b.Property<Guid?>("MessageId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<string>("NormalizedEmail")
                         .HasMaxLength(256)
                         .HasColumnType("nvarchar(256)");
@@ -209,6 +215,8 @@ namespace NChat.Persistence.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("MessageId");
+
                     b.HasIndex("NormalizedEmail")
                         .HasDatabaseName("EmailIndex");
 
@@ -235,16 +243,9 @@ namespace NChat.Persistence.Migrations
 
                     b.Property<string>("ReceivedId")
                         .IsRequired()
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<Guid?>("UserId")
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("ReceivedId");
-
-                    b.HasIndex("UserId");
 
                     b.ToTable("Messages");
                 });
@@ -266,9 +267,14 @@ namespace NChat.Persistence.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<Guid>("SentMessagesId1")
+                        .HasColumnType("uniqueidentifier");
+
                     b.HasKey("Id");
 
                     b.HasIndex("AppUserId");
+
+                    b.HasIndex("SentMessagesId1");
 
                     b.ToTable("Users");
                 });
@@ -324,19 +330,11 @@ namespace NChat.Persistence.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("NChat.Domain.Entities.Message", b =>
+            modelBuilder.Entity("NChat.Domain.Entities.Identity.AppUser", b =>
                 {
-                    b.HasOne("NChat.Domain.Entities.Identity.AppUser", "Received")
-                        .WithMany()
-                        .HasForeignKey("ReceivedId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("NChat.Domain.Entities.User", null)
-                        .WithMany("SentMessages")
-                        .HasForeignKey("UserId");
-
-                    b.Navigation("Received");
+                    b.HasOne("NChat.Domain.Entities.Message", null)
+                        .WithMany("Received")
+                        .HasForeignKey("MessageId");
                 });
 
             modelBuilder.Entity("NChat.Domain.Entities.User", b =>
@@ -347,12 +345,20 @@ namespace NChat.Persistence.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("NChat.Domain.Entities.Message", "SentMessages")
+                        .WithMany()
+                        .HasForeignKey("SentMessagesId1")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.Navigation("AppUser");
+
+                    b.Navigation("SentMessages");
                 });
 
-            modelBuilder.Entity("NChat.Domain.Entities.User", b =>
+            modelBuilder.Entity("NChat.Domain.Entities.Message", b =>
                 {
-                    b.Navigation("SentMessages");
+                    b.Navigation("Received");
                 });
 #pragma warning restore 612, 618
         }

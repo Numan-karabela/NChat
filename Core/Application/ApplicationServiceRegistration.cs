@@ -11,7 +11,7 @@ public static class ApplicationServiceRegistration
     public static void AddApplicationService(this IServiceCollection services,IConfiguration configuration)
     {
         var assm = Assembly.GetExecutingAssembly();
-         services.AddAutoMapper(assm);
+         //services.AddAutoMapper(assm);
         services.AddMediatR(assm);
         services.AddFluentValidation(p => p.RegisterValidatorsFromAssembly(assm));
 
