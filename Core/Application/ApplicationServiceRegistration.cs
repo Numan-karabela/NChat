@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using FluentValidation.AspNetCore;
 using MediatR;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -12,5 +13,7 @@ public static class ApplicationServiceRegistration
         var assm = Assembly.GetExecutingAssembly();
          services.AddAutoMapper(assm);
         services.AddMediatR(assm);
+        services.AddFluentValidation(p => p.RegisterValidatorsFromAssembly(assm));
+
     }
 }

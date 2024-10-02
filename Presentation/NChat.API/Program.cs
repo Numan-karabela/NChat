@@ -1,5 +1,6 @@
 using NChat.Persistence;
 using NChat.Application;
+using NChat.API.Middlewares;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -10,15 +11,12 @@ builder.Services.AddControllers();
 builder.Services.AddPersistenceService(builder.Configuration);
 builder.Services.AddApplicationService(builder.Configuration);
 
+builder.Services.AddCorsServiceRefistrations();//police
 
 
-builder.Services.AddCors(opsions => opsions.AddDefaultPolicy(policy =>
-
-    policy.AllowAnyHeader().
-    AllowAnyMethod().
-    AllowCredentials().SetIsOriginAllowed(x => true)));
 
 var app = builder.Build();
+
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
