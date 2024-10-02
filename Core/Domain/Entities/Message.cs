@@ -8,9 +8,11 @@ using System.Threading.Tasks;
 
 namespace NChat.Domain.Entities;
 
-public class Message:BaseEntity
-{ 
-    public string Messagee { get; set; }
-    public string ToUsersId { get; set; }
-    public ICollection<AppUser> ToUsers { get; set; }
+
+public class Message : BaseEntity
+{
+    public string MessageBody { get; set; }
+    public string SenderId { get; set; }
+    public AppUser Sender { get; set; }
+    
 }

@@ -14,7 +14,7 @@ public static class PersistenceServiceRegistration
     {
         services.AddDbContext<NChatDbContext>(options => 
         options.UseSqlServer(configuration.GetConnectionString("NChatSql")));
-        services.AddScoped<INChatDbContext, NChatDbContext>();
+        //services.AddScoped<INChatDbContext, NChatDbContext>();
 
         services.AddIdentity<AppUser, AppRole>(options =>
         {
@@ -23,8 +23,6 @@ public static class PersistenceServiceRegistration
             options.Password.RequireDigit = false;
             options.Password.RequireLowercase = false;
             options.Password.RequireUppercase = false;
-
-
         }).AddEntityFrameworkStores<NChatDbContext>()
           .AddDefaultTokenProviders();
 

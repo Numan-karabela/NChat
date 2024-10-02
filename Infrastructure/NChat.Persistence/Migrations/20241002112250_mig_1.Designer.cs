@@ -12,7 +12,7 @@ using NChat.Persistence.Context;
 namespace NChat.Persistence.Migrations
 {
     [DbContext(typeof(NChatDbContext))]
-    [Migration("20240930172336_mig_1")]
+    [Migration("20241002112250_mig_1")]
     partial class mig_1
     {
         /// <inheritdoc />
@@ -24,21 +24,6 @@ namespace NChat.Persistence.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
-
-            modelBuilder.Entity("AppUserMessage", b =>
-                {
-                    b.Property<Guid>("MessagesId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("ToUsersId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.HasKey("MessagesId", "ToUsersId");
-
-                    b.HasIndex("ToUsersId");
-
-                    b.ToTable("AppUserMessage");
-                });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
@@ -198,10 +183,6 @@ namespace NChat.Persistence.Migrations
                     b.Property<DateTimeOffset?>("LockoutEnd")
                         .HasColumnType("datetimeoffset");
 
-                    b.Property<string>("MessageId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("NormalizedEmail")
                         .HasMaxLength(256)
                         .HasColumnType("nvarchar(256)");
@@ -220,6 +201,10 @@ namespace NChat.Persistence.Migrations
                         .HasColumnType("bit");
 
                     b.Property<string>("SecurityStamp")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("SentMessagesId")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("TwoFactorEnabled")
@@ -251,32 +236,20 @@ namespace NChat.Persistence.Migrations
                     b.Property<DateTime>("DateTime")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("Messagee")
+                    b.Property<string>("MessageBody")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("ToUsersId")
+                    b.Property<string>("SenderId")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.HasKey("Id");
 
+                    b.HasIndex("SenderId")
+                        .IsUnique();
+
                     b.ToTable("Messages");
-                });
-
-            modelBuilder.Entity("AppUserMessage", b =>
-                {
-                    b.HasOne("NChat.Domain.Entities.Message", null)
-                        .WithMany()
-                        .HasForeignKey("MessagesId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("NChat.Domain.Entities.Identity.AppUser", null)
-                        .WithMany()
-                        .HasForeignKey("ToUsersId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -327,6 +300,23 @@ namespace NChat.Persistence.Migrations
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("NChat.Domain.Entities.Message", b =>
+                {
+                    b.HasOne("NChat.Domain.Entities.Identity.AppUser", "Sender")
+                        .WithOne("SentMessages")
+                        .HasForeignKey("NChat.Domain.Entities.Message", "SenderId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Sender");
+                });
+
+            modelBuilder.Entity("NChat.Domain.Entities.Identity.AppUser", b =>
+                {
+                    b.Navigation("SentMessages")
                         .IsRequired();
                 });
 #pragma warning restore 612, 618
