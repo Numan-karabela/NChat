@@ -12,7 +12,7 @@ using NChat.Persistence.Context;
 namespace NChat.Persistence.Migrations
 {
     [DbContext(typeof(NChatDbContext))]
-    [Migration("20241002144750_mig_1")]
+    [Migration("20241004170445_mig_1")]
     partial class mig_1
     {
         /// <inheritdoc />
@@ -238,42 +238,17 @@ namespace NChat.Persistence.Migrations
 
                     b.Property<string>("ReceivedId")
                         .IsRequired()
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<Guid?>("UserId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ReceivedId");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("Messages");
-                });
-
-            modelBuilder.Entity("NChat.Domain.Entities.User", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("AppUserId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<DateTime>("DateTime")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("SentMessagesId")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("SenderId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
                     b.HasKey("Id");
 
-                    b.HasIndex("AppUserId");
+                    b.HasIndex("SenderId");
 
-                    b.ToTable("Users");
+                    b.ToTable("Messages");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -329,33 +304,18 @@ namespace NChat.Persistence.Migrations
 
             modelBuilder.Entity("NChat.Domain.Entities.Message", b =>
                 {
-                    b.HasOne("NChat.Domain.Entities.Identity.AppUser", "Received")
-                        .WithMany()
-                        .HasForeignKey("ReceivedId")
+                    b.HasOne("NChat.Domain.Entities.Identity.AppUser", "Sender")
+                        .WithMany("Messages")
+                        .HasForeignKey("SenderId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("NChat.Domain.Entities.User", null)
-                        .WithMany("SentMessages")
-                        .HasForeignKey("UserId");
-
-                    b.Navigation("Received");
+                    b.Navigation("Sender");
                 });
 
-            modelBuilder.Entity("NChat.Domain.Entities.User", b =>
+            modelBuilder.Entity("NChat.Domain.Entities.Identity.AppUser", b =>
                 {
-                    b.HasOne("NChat.Domain.Entities.Identity.AppUser", "AppUser")
-                        .WithMany()
-                        .HasForeignKey("AppUserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("AppUser");
-                });
-
-            modelBuilder.Entity("NChat.Domain.Entities.User", b =>
-                {
-                    b.Navigation("SentMessages");
+                    b.Navigation("Messages");
                 });
 #pragma warning restore 612, 618
         }

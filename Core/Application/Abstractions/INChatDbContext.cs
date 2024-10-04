@@ -12,6 +12,7 @@ namespace NChat.Application.Abstractions
    public interface INChatDbContext
     {
         public DbSet<Message> Messages { get; set; }
-        public DbSet<User> Users { get; set; }
+        public DbSet<AppUser> AppUsers { get; set; }
+
     }
 }

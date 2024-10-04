@@ -11,7 +11,8 @@ namespace NChat.Domain.Entities;
 
 public class Message : BaseEntity
 {
-    public string MessageBody { get; set; }
+    public string SenderId { get; set; }
+    public AppUser Sender { get; set; }
+    public string MessageBody { get; set; } 
     public string ReceivedId { get; set; }
-    public AppUser Received { get; set; }
 }
