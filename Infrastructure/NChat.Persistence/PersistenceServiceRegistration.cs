@@ -2,9 +2,10 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using NChat.Application.Abstractions;
+using NChat.Application.Abstractions.Repositorys;
 using NChat.Domain.Entities.Identity;
 using NChat.Persistence.Context;
+using NChat.Persistence.Repositorys;
 
 namespace NChat.Persistence;
 
@@ -14,7 +15,7 @@ public static class PersistenceServiceRegistration
     {
         services.AddDbContext<NChatDbContext>(options => 
         options.UseSqlServer(configuration.GetConnectionString("NChatSql")));
-        //services.AddScoped<INChatDbContext, NChatDbContext>();
+        services.AddScoped<IUserRepository,UserRepository>();
 
         services.AddIdentity<AppUser, AppRole>(options =>
         {

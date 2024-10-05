@@ -23,6 +23,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Features\Chat\CreateChat\" />
     <Folder Include="Validations\" />
   </ItemGroup>
 

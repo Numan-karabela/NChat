@@ -3,20 +3,19 @@ using Microsoft.AspNetCore.SignalR;
 
 namespace MChat.SignalR
 {
-    public class DenemeHub(IMediator _mediator) :Hub
+    public class DenemeHub:Hub
     {
-        public async Task MessageAsync()
+        public static Dictionary<string, Guid> Users = new();
+        public async Task Connect(Guid userId)
         {
-            
+            Users.Add(Context.ConnectionId, userId);
+            User? user = await context.Users.FindAsync(userId);
+            if (user is not null)
+            {
+                 
+                await Clients.All.SendAsync("Users", user);
+            }
         }
-        public override async Task OnConnectedAsync()
-        {
-           var a= Context.ConnectionId;
-            
-        }
-        public override async Task OnDisconnectedAsync(Exception exception)
-        {
-            
-        }
+
     }
 }

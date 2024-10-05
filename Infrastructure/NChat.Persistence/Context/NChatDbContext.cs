@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace NChat.Persistence.Context
 {
-    public class NChatDbContext : IdentityDbContext<AppUser, AppRole, string>,INChatDbContext
+    public class NChatDbContext : IdentityDbContext<AppUser, AppRole, string> 
     {
        
         public NChatDbContext(DbContextOptions options) : base(options)

@@ -6,9 +6,11 @@ using System.Threading.Tasks;
 
 namespace NChat.Application.Features.Users.LoginUsers
 {
-    class LoginUserCommandResponse
+    public class LoginUserCommandResponse
     {
-        public string Id { get; set; }
-        public string Name { get; set; }
+        public string? Message { get; set; } = string.Empty;
+        public string? UserId{ get; set; } = string.Empty;
+        public string? UserName { get; set; } = string.Empty;
+
     }
 }

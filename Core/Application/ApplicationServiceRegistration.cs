@@ -12,7 +12,7 @@ public static class ApplicationServiceRegistration
     {
         var assm = Assembly.GetExecutingAssembly();
          //services.AddAutoMapper(assm);
-        services.AddMediatR(assm);
+         services.AddMediatR(assm);
         services.AddFluentValidation(p => p.RegisterValidatorsFromAssembly(assm));
 
     }

@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using NChat.Application.Features.Users.GetUsers;
 using NChat.Domain.Entities;
 using NChat.Domain.Entities.Identity;
 using System;
@@ -7,12 +8,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace NChat.Application.Abstractions
+namespace NChat.Application.Abstractions.Repositorys; 
+public interface IUserRepository
 {
-   public interface INChatDbContext
-    {
-        public DbSet<Message> Messages { get; set; }
-        public DbSet<AppUser> AppUsers { get; set; }
-
-    }
+    Task<List<GetUserQueryResponse>>? GetUsersAsync();
 }
