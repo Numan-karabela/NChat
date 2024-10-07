@@ -14,7 +14,7 @@ namespace NChat.Persistence.Repositorys
 {
     public class ChatRepository(NChatDbContext nChatDb) : IChatRepository
     {
-        public async Task<List<GetChatQueryResponse>>? GetChatAsync(string userId, string toUserId,CancellationToken cancellationToken)
+        public async Task<List<GetChatQueryResponse>> GetChatAsync(string userId, string toUserId,CancellationToken cancellationToken)
         {
            return await nChatDb
                 .Messages

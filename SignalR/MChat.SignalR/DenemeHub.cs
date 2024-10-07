@@ -1,21 +1,14 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.SignalR;
 
-namespace MChat.SignalR
-{
-    public class DenemeHub:Hub
-    {
-        public static Dictionary<string, Guid> Users = new();
-        public async Task Connect(Guid userId)
-        {
-            Users.Add(Context.ConnectionId, userId);
-            User? user = await context.Users.FindAsync(userId);
-            if (user is not null)
-            {
-                 
-                await Clients.All.SendAsync("Users", user);
-            }
-        }
+namespace MChat.SignalR;
 
+public class DenemeHub:Hub
+{
+    public static Dictionary<string, Guid> Users = new();
+    public async Task Connect(Guid userId)
+    {
+        Users.Add(Context.ConnectionId, userId);  
     }
+
 }

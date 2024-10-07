@@ -16,6 +16,8 @@ public static class PersistenceServiceRegistration
         services.AddDbContext<NChatDbContext>(options => 
         options.UseSqlServer(configuration.GetConnectionString("NChatSql")));
         services.AddScoped<IUserRepository,UserRepository>();
+        services.AddScoped<IChatRepository,ChatRepository>();
+
 
         services.AddIdentity<AppUser, AppRole>(options =>
         {

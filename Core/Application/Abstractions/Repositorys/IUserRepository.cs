@@ -11,5 +11,5 @@ using System.Threading.Tasks;
 namespace NChat.Application.Abstractions.Repositorys; 
 public interface IUserRepository
 {
-    Task<List<GetUserQueryResponse>>? GetUsersAsync();
+    Task<List<GetUserQueryResponse>> GetUsersAsync();
 }
