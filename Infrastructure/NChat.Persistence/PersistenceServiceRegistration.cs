@@ -17,8 +17,8 @@ public static class PersistenceServiceRegistration
         options.UseSqlServer(configuration.GetConnectionString("NChatSql")));
         services.AddScoped<IUserRepository,UserRepository>();
         services.AddScoped<IChatRepository,ChatRepository>(); 
-
-
+           
+         
         services.AddIdentity<AppUser, AppRole>(options =>
         {
             options.Password.RequiredLength = 3;
