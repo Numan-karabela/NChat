@@ -14,14 +14,13 @@ public class CreateUserCommandHandler(UserManager<AppUser> _userManager) : IRequ
 {
     public async Task<string> Handle(CreateUserCommandRequest request, CancellationToken cancellationToken)
     {
-       //var user= _mapper.Map<AppUser>(request);
-       var  ıdentityResult=await _userManager.CreateAsync(new()
+       var  ıdentityResult= await _userManager.CreateAsync(new()
        {
            Id = Guid.NewGuid().ToString(),
            
            UserName = request.UserName,  
            Email = request.Email,
-           
+
        }, request.Password);
 
         return ıdentityResult.ToString();

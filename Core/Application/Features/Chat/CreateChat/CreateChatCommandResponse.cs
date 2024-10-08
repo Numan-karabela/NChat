@@ -6,6 +6,6 @@ using System.Threading.Tasks;
 
 namespace NChat.Application.Features.Chat.CreateChat;
 
-internal class CreateChatCommandResponse
+public class CreateChatCommandResponse
 {
 }
