@@ -40,4 +40,8 @@ public class LoginUserCommandHandler(UserManager<AppUser> _userManager, SignInMa
         };
 
     }
+<<<<<<< HEAD
 } 
+=======
+} 
+>>>>>>> 7f767905973965ae10e8c2fbc32206150632c529
