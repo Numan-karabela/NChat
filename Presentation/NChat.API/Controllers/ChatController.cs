@@ -12,10 +12,16 @@ namespace NChat.API.Controllers;
 [ApiController]
 public class ChatController(IMediator mediator) : ControllerBase
 {
-    [HttpGet]
-    public async Task<IActionResult> GetChatsAsync(GetChatQueryRequest request)
+    [HttpGet("Get")]
+    public async Task<IActionResult> GetChatsAsync([FromQuery]GetChatQueryRequest request)
     {
        var message =await mediator.Send(request);
+        return Ok(message);
+    }
+    [HttpGet("Get")]
+    public async Task<IActionResult> GetChatsAsync([FromQuery] GetChatQueryRequest request)
+    {
+        var message = await mediator.Send(request);
         return Ok(message);
     }
 }

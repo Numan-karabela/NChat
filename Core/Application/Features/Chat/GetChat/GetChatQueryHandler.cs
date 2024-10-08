@@ -6,14 +6,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace NChat.Application.Features.Chat.GetChat
+namespace NChat.Application.Features.Chat.GetChat;
+
+public class GetChatQueryHandler(IChatRepository chatRepository): IRequestHandler<GetChatQueryRequest,List<GetChatQueryResponse>>
 {
-    public class GetChatQueryHandler(IChatRepository chatRepository): IRequestHandler<GetChatQueryRequest,List<GetChatQueryResponse>>
+    public async Task<List<GetChatQueryResponse>> Handle(GetChatQueryRequest request, CancellationToken cancellationToken)
     {
-        public async Task<List<GetChatQueryResponse>> Handle(GetChatQueryRequest request, CancellationToken cancellationToken)
-        {
-          return await chatRepository.GetChatAsync(request.userId,request.toUserId,cancellationToken);
-             
-        }
+      return await chatRepository.GetChatAsync(request.userId, cancellationToken);
+         
     }
 }

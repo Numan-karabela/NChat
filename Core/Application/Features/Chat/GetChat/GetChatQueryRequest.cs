@@ -9,7 +9,6 @@ namespace NChat.Application.Features.Chat.GetChat
 {
     public class GetChatQueryRequest:IRequest<List<GetChatQueryResponse>>
     {
-        public string userId { get; set; }
-        public string toUserId { get; set; } 
+        public string userId { get; set; } 
     }
 }

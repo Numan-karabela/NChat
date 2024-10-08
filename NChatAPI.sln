@@ -19,7 +19,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Presentation", "Presentatio
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NChat.API", "Presentation\NChat.API\NChat.API.csproj", "{E78FD157-5315-47A2-AA62-3B404BA9E760}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MChat.SignalR", "SignalR\MChat.SignalR\MChat.SignalR.csproj", "{8EB05C22-3BD6-4166-9606-1CD45E15455B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MChat.SignalR", "SignalR\MChat.SignalR\MChat.SignalR.csproj", "{8EB05C22-3BD6-4166-9606-1CD45E15455B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

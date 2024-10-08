@@ -18,7 +18,6 @@ public static class PersistenceServiceRegistration
         services.AddScoped<IUserRepository,UserRepository>();
         services.AddScoped<IChatRepository,ChatRepository>(); 
            
-         
         services.AddIdentity<AppUser, AppRole>(options =>
         {
             options.Password.RequiredLength = 3;
