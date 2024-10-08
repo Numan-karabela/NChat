@@ -2,7 +2,9 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using NChat.Application.Features.Chat.CreateChat;
 using NChat.Application.Features.Chat.GetChat;
+using NChat.Application.Features.Users.CreateUsers;
 using NChat.Persistence.Context;
 using System;
 
@@ -18,8 +20,8 @@ public class ChatController(IMediator mediator) : ControllerBase
        var message =await mediator.Send(request);
         return Ok(message);
     }
-    [HttpGet("Get")]
-    public async Task<IActionResult> GetChatsAsync([FromQuery] GetChatQueryRequest request)
+    [HttpGet("Create")]
+    public async Task<IActionResult> CreateMessageAsync([FromQuery] CreateChatCommandRequest request)
     {
         var message = await mediator.Send(request);
         return Ok(message);
