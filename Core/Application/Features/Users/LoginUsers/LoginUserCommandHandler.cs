@@ -1,15 +1,12 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.EntityFrameworkCore;
-using NChat.Application.Abstractions;
 using NChat.Domain.Entities.Identity;
 
 namespace NChat.Application.Features.Users.LoginUsers;
 
 public class LoginUserCommandHandler(UserManager<AppUser> _userManager, SignInManager<AppUser> _signInManager) :
     IRequestHandler<LoginUserCommandRequest, LoginUserCommandResponse>
-{
-
+{ 
     async Task<LoginUserCommandResponse> IRequestHandler<LoginUserCommandRequest, LoginUserCommandResponse>.Handle(LoginUserCommandRequest request, CancellationToken cancellationToken)
     {
 
@@ -34,6 +31,7 @@ public class LoginUserCommandHandler(UserManager<AppUser> _userManager, SignInMa
             };
 
         }
+
         return new()
         {
             Message = "Kullanıcı ile şifre eşleşmiyor"

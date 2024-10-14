@@ -6,9 +6,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace NChat.Application.Features.Users.GetUsers
+namespace NChat.Application.Features.Users.GetUsers;
+
+public class GetUserQueryRequest:IRequest<List<GetUserQueryResponse>>
 {
-    public class GetUserQueryRequest:IRequest<List<GetUserQueryResponse>>
-    {
-    }
 }
