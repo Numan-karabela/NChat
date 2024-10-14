@@ -2,7 +2,6 @@
 using NChat.Application.Abstractions.Repositorys;
 using NChat.Application.Features.Chat.CreateChat;
 using NChat.Application.Features.Chat.GetChat;
-using NChat.Domain.Entities;
 using NChat.Persistence.Context;
 
 namespace NChat.Persistence.Repositorys;

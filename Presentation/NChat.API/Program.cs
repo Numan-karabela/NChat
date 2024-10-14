@@ -1,8 +1,7 @@
-using NChat.Persistence;
-using NChat.Application; 
 using NChat.API.Middlewares;
-using MChat.SignalR;
-using MChat.SignalR.Hubs;
+using NChat.Application;
+using NChat.Persistence;
+using NChat.SignalR;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -15,8 +14,6 @@ builder.Services.AddApplicationService(builder.Configuration);
 builder.Services.AddSignalR();
 builder.Services.AddCorsServiceRefistrations();//police
 
-
-
 var app = builder.Build();
 
 if (app.Environment.IsDevelopment())
@@ -26,12 +23,9 @@ if (app.Environment.IsDevelopment())
 }
 
 // Configure the HTTP request pipeline.
-app.UseCors();
-
-app.UseHttpsRedirection();
-
+app.UseCors(); 
+app.UseHttpsRedirection(); 
 app.UseAuthorization();
-
+app.AddMapHub();
 app.MapControllers();
-app.MapHub<ChatHub>("Message-Hub");
 app.Run();

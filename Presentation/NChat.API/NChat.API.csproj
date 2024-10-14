@@ -17,6 +17,7 @@
   <ItemGroup>
     <ProjectReference Include="..\..\Infrastructure\Infrastructure\NChat.Infrastructure.csproj" />
     <ProjectReference Include="..\..\Infrastructure\NChat.Persistence\NChat.Persistence.csproj" />
+    <ProjectReference Include="..\..\Infrastructure\NChat.SignalR\NChat.SignalR.csproj" />
     <ProjectReference Include="..\..\SignalR\MChat.SignalR\MChat.SignalR.csproj" />
   </ItemGroup>
 

@@ -11,7 +11,7 @@ public class CreateChatCommandHandler(IChatRepository chat, IHubContext<ChatHub>
     {
         string connectionId = ChatHub.Users.First(p => p.Value == request.ReceivedId).Key;
 
-        await hubContext.Clients.Client(connectionId).SendAsync("Messages", request.MessageBody);
+        await hubContext.Clients.Client(connectionId).SendAsync("Message-Hub", request.MessageBody);
         await chat.CreateMessageAsync(request);
         return "Başarılı";
     }
