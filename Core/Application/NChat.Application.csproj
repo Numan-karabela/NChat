@@ -19,6 +19,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\SignalR\MChat.SignalR\MChat.SignalR.csproj" />
     <ProjectReference Include="..\Domain\NChat.Domain.csproj" />
   </ItemGroup>
 

@@ -1,20 +1,18 @@
-﻿using MediatR;
+﻿using MChat.SignalR;
+using MediatR;
+using Microsoft.AspNetCore.SignalR;
 using NChat.Application.Abstractions.Repositorys;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace NChat.Application.Features.Chat.CreateChat
+namespace NChat.Application.Features.Chat.CreateChat;
+
+public class CreateChatCommandHandler(IChatRepository chat, IHubContext<DenemeHub> hubContext) : IRequestHandler<CreateChatCommandRequest, string>
 {
-    public class CreateChatCommandHandler(IChatRepository chat): IRequestHandler<CreateChatCommandRequest, string>
+    public async Task<string> Handle(CreateChatCommandRequest request, CancellationToken cancellationToken)
     {
-        public async Task<string> Handle(CreateChatCommandRequest request, CancellationToken cancellationToken)
-        {
+        string connectionId = DenemeHub.Users.First(p => p.Value == request.ReceivedId).Key;
 
-           await chat.CreateMessageAsync(request);
-            return "Başarılı";
-        }
+        await hubContext.Clients.Client(connectionId).SendAsync("Messages", request.MessageBody);
+        await chat.CreateMessageAsync(request);
+        return "Başarılı";
     }
 }
