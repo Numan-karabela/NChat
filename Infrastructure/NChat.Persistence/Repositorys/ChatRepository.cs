@@ -24,11 +24,11 @@ public class ChatRepository(NChatDbContext nChatDb) : IChatRepository
 
     }
 
-    public async Task<List<GetChatQueryResponse>> GetChatAsync(string userId ,CancellationToken cancellationToken)
+    public async Task<List<GetChatQueryResponse>> GetChatAsync(Guid userId ,CancellationToken cancellationToken)
     {
        return await nChatDb
             .Messages
-            .Where(p => p.SenderId == userId || p.ReceivedId == userId)
+            .Where(p => p.SenderId == userId.ToString() || p.ReceivedId == userId.ToString())
             .OrderBy(p => p.DateTime).Select(
        p => new GetChatQueryResponse()
        {

@@ -2,7 +2,7 @@
 
 public static class CorsService
 {
-    public static void AddCorsServiceRefistrations(this IServiceCollection services)
+    public static void AddCorsServiceRefistrations(this IServiceCollection services )
     {
         services.AddCors(opsions =>
              opsions.AddDefaultPolicy

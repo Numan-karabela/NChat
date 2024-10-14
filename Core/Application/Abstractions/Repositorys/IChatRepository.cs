@@ -6,6 +6,6 @@ namespace NChat.Application.Abstractions.Repositorys;
 
 public interface IChatRepository
 {
-    Task<List<GetChatQueryResponse>> GetChatAsync(string userId ,CancellationToken cancellationToken);
+    Task<List<GetChatQueryResponse>> GetChatAsync(Guid userId ,CancellationToken cancellationToken);
     Task CreateMessageAsync(CreateChatCommandRequest message);
 }

@@ -1,6 +1,8 @@
 using NChat.Persistence;
-using NChat.Application;
+using NChat.Application; 
 using NChat.API.Middlewares;
+using MChat.SignalR;
+using MChat.SignalR.Hubs;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -10,7 +12,7 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddControllers();
 builder.Services.AddPersistenceService(builder.Configuration);
 builder.Services.AddApplicationService(builder.Configuration);
-
+builder.Services.AddSignalR();
 builder.Services.AddCorsServiceRefistrations();//police
 
 
@@ -31,5 +33,5 @@ app.UseHttpsRedirection();
 app.UseAuthorization();
 
 app.MapControllers();
-
+app.MapHub<ChatHub>("Message-Hub");
 app.Run();

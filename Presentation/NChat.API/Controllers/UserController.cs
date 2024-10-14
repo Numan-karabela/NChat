@@ -1,15 +1,8 @@
-﻿using MChat.SignalR;
-using MediatR;
-using Microsoft.AspNetCore.Http;
+﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.SignalR;
-using Microsoft.EntityFrameworkCore;
-using NChat.Application.Abstractions;
 using NChat.Application.Features.Users.CreateUsers;
 using NChat.Application.Features.Users.GetUsers;
 using NChat.Application.Features.Users.LoginUsers;
-using NChat.Domain.Entities;
-using NChat.Domain.Entities.Identity;
 using NChat.Persistence.Context;
 
 namespace NChat.API.Controllers;
